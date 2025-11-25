@@ -1,0 +1,25 @@
+.homeBody {
+  width: 1200px;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  font-family: 'JUMBOTRON', 'Molot', sans-serif;
+}
+
+.logo {
+  font-size: 96px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  letter-spacing: 16px;
+}
+
+.clock {
+  font-size: 180px;
+  font-weight: bold;
+  letter-spacing: 20px;
+  text-align: center;
+}

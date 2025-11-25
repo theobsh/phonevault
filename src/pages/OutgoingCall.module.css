@@ -1,0 +1,93 @@
+.callBody {
+  width: 1200px;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.callContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 100px;
+}
+
+.callerInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.callerAvatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #2a2a2a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 120px;
+  border: 4px solid #444;
+}
+
+.callerName {
+  color: #fff;
+  font-size: 84px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.callStatus {
+  color: #aaa;
+  font-size: 48px;
+  margin: 0;
+}
+
+.actionButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.callButton {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.buttonIcon {
+  font-size: 65px;
+}
+
+.buttonLabel {
+  font-size: 30px;
+}
+
+.endButton {
+  background-color: #ff3b30;
+  color: #fff;
+}
+
+.endButton:hover {
+  background-color: #e6342a;
+  transform: scale(1.05);
+}
+
+.endButton:active {
+  transform: scale(0.95);
+}

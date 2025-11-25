@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Molot";
+  src: url("./assets/Molot.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: "Molot", sans-serif;
+  /* 나머지 스타일 유지 */
+}
+
+body {
+  font-family: "Molot", sans-serif;
+  /* 나머지 스타일 유지 */
+}

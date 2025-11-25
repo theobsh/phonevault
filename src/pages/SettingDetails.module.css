@@ -1,0 +1,297 @@
+.detailsBody {
+  width: 1200px;
+  height: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.detailsContainer {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 0;
+}
+
+.backButton {
+  padding: 15px 30px;
+  font-size: 32px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #2a2a2a;
+  border-color: #555;
+}
+
+.title {
+  color: #fff;
+  font-size: 64px;
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background-color: #0a0a0a;
+  border-radius: 12px;
+}
+
+.settingSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sectionTitle {
+  color: #fff;
+  font-size: 42px;
+  margin: 20px 0 10px 0;
+}
+
+/* Connection Settings */
+.deviceList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.deviceItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px 30px;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.deviceEmoji {
+  font-size: 48px;
+}
+
+.deviceName {
+  flex: 1;
+  color: #fff;
+  font-size: 36px;
+}
+
+.deviceStatus {
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.connected {
+  background-color: #00ff0020;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+}
+
+.disconnected {
+  background-color: #ff000020;
+  color: #ff0000;
+  border: 2px solid #ff0000;
+}
+
+/* Sound Settings */
+.dropdownContainer {
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 20px 25px;
+  font-size: 36px;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.dropdown:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.dropdown option {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 10px;
+}
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.slider {
+  flex: 1;
+  height: 12px;
+  background: #333;
+  border-radius: 6px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  background: #00ff00;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 40px;
+  height: 40px;
+  background: #00ff00;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.sliderValue {
+  color: #fff;
+  font-size: 36px;
+  min-width: 120px;
+  text-align: right;
+}
+
+/* Light Settings */
+.colorContainer {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.colorPicker {
+  width: 120px;
+  height: 120px;
+  border: 3px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.colorPicker::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.colorPicker::-webkit-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+.colorValue {
+  color: #fff;
+  font-size: 36px;
+  text-transform: uppercase;
+}
+
+/* Notification Settings */
+.notificationList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.notificationItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 30px;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.appName {
+  color: #fff;
+  font-size: 36px;
+}
+
+.toggle {
+  position: relative;
+  width: 120px;
+  height: 60px;
+  background-color: #333;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggleOn {
+  background-color: #00ff00;
+}
+
+.toggleOff {
+  background-color: #666;
+}
+
+.toggleSlider {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggleOn .toggleSlider {
+  transform: translateX(60px);
+}
+
+.toggleOff .toggleSlider {
+  transform: translateX(0);
+}
+
+/* Scrollbar styling */
+.content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #1a1a1a;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
