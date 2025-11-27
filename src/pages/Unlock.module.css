@@ -1,6 +1,6 @@
 .unlockBody {
-  width: 1200px;
-  height: 800px;
+  width: 1280px;
+  height: 720px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px;
+  gap: 40px;
 }
 
 .header {
@@ -157,20 +157,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
+  gap: 30px;
   width: 100%;
 }
 
 .countdownTitle {
   color: #fff;
-  font-size: 96px;
+  font-size: 80px;
   text-align: center;
   margin: 0;
 }
 
 .countdownTimer {
   color: #34c759;
-  font-size: 200px;
+  font-size: 170px;
   font-weight: bold;
   font-family: monospace;
   text-align: center;

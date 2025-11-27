@@ -8,10 +8,13 @@
 
 :root {
   font-family: "Molot", sans-serif;
-  /* 나머지 스타일 유지 */
 }
 
-body {
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 1280px;
+  height: 720px;
+  overflow: hidden; /* Prevent scrolling */
   font-family: "Molot", sans-serif;
-  /* 나머지 스타일 유지 */
 }
