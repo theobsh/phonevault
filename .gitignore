@@ -7,7 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-prompts
 node_modules
 dist
 dist-ssr
@@ -16,6 +15,8 @@ package-lock.json
 vercel.json
 eslint.config.js
 vite.config.js
+/src/assets
+/prompts
 
 # Editor directories and files
 .vscode/*

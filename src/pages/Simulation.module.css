@@ -12,14 +12,14 @@
   height: 90%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
 .header {
   display: flex;
   align-items: center;
   gap: 30px;
-  padding: 20px 0;
+  padding: 15px 0;
 }
 
 .backButton {
@@ -46,21 +46,21 @@
 
 .title {
   color: #fff;
-  font-size: 64px;
+  font-size: 56px;
   margin: 0;
 }
 
 .simulationContent {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   width: 100%;
 }
 
 .simButton {
   width: 100%;
-  padding: 40px;
-  font-size: 48px;
+  padding: 30px;
+  font-size: 40px;
   font-weight: bold;
   background-color: #1a1a1a;
   color: #fff;

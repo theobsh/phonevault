@@ -15,6 +15,8 @@ const DEFAULT_SETTINGS = {
   autonomousWaitMinutes: 30,
 };
 
+export const DEFAULT_USAGE_SETTINGS = Object.freeze({ ...DEFAULT_SETTINGS });
+
 const isBrowser = () => typeof window !== 'undefined' && !!window.localStorage;
 
 const todayKey = () => {
@@ -88,6 +90,13 @@ export const getUnlockSession = () => {
 const persistSession = (session) => {
   if (!isBrowser()) return;
   localStorage.setItem(STORAGE_KEYS.unlockSession, JSON.stringify(session));
+};
+
+export const resetVaultStorage = () => {
+  if (!isBrowser()) return;
+  Object.values(STORAGE_KEYS).forEach((key) => {
+    localStorage.removeItem(key);
+  });
 };
 
 export const startUnlockSession = (durationMinutes) => {
@@ -186,4 +195,23 @@ export const getEffectiveDailyRemainingSeconds = (limitHours) => {
   const baseRemaining = getRemainingDailySeconds(limitHours);
   const elapsed = getActiveSessionElapsedSeconds();
   return Math.max(0, baseRemaining - elapsed);
+};
+
+export const forceSessionRemainingSeconds = (remainingSeconds = 10) => {
+  if (!isBrowser()) return false;
+  const session = getUnlockSession();
+  if (!session) return false;
+
+  const safeRemaining = Math.max(1, Math.round(remainingSeconds));
+  const now = Date.now();
+  const elapsedSeconds = Math.max(0, Math.floor((now - session.startedAt) / 1000));
+
+  const updatedSession = {
+    ...session,
+    durationSeconds: elapsedSeconds + safeRemaining,
+    expiresAt: now + safeRemaining * 1000,
+  };
+
+  persistSession(updatedSession);
+  return true;
 };

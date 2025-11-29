@@ -1,13 +1,13 @@
 @font-face {
-  font-family: "Molot";
-  src: url("./assets/Molot.otf") format("opentype");
+  font-family: "Nanum Gothic";
+  src: url("./assets/NanumGothic-Regular.ttf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 :root {
-  font-family: "Molot", sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
 }
 
 html, body {
@@ -16,5 +16,5 @@ html, body {
   width: 1280px;
   height: 780px;
   overflow: hidden; /* Prevent scrolling */
-  font-family: "Molot", sans-serif;
+  font-family: "Nanum Gothic", sans-serif;
 }

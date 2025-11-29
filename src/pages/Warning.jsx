@@ -75,9 +75,6 @@ const Warning = () => {
         </div>
         <div className={styles.overtimeLabel}>초과 시간</div>
         <div className={styles.overtimeTimer}>{formatTime(overtimeSeconds)}</div>
-        <div className={styles.actionText}>
-          계속 초과 시 경고 기록이 누적됩니다.
-        </div>
         <button className={styles.storeButton} onClick={handleStore} disabled={isStoring || storeConfirmed}>
           {isStoring ? '보관 확인 중...' : storeConfirmed ? '보관 완료' : '지금 보관하기'}
         </button>

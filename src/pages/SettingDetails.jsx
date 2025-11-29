@@ -58,7 +58,36 @@ const SettingDetails = () => {
   const handleModeToggle = () => {
     setUsageMode(prev => {
       const next = prev === '고정시간모드' ? '자율모드' : '고정시간모드';
-      saveUsageSettings({ usageMode: next });
+      
+      // When switching from fixed time mode to autonomous mode, clear fixed time data
+      if (prev === '고정시간모드' && next === '자율모드') {
+        saveUsageSettings({
+          usageMode: next,
+          fixedTimeHours: 0  // Clear fixed time data
+        });
+        setFixedTimeHours(0);
+      }
+      // When switching from autonomous mode to fixed time mode, reset to default values
+      else if (prev === '자율모드' && next === '고정시간모드') {
+        const defaultFixedTime = 3; // Default value from DEFAULT_SETTINGS
+        saveUsageSettings({
+          usageMode: next,
+          fixedTimeHours: defaultFixedTime
+        });
+        setFixedTimeHours(defaultFixedTime);
+        
+        // Initialize local storage remaining time when switching to fixed time mode
+        // This ensures the daily remaining time is properly set to the full fixed time hours
+        const today = new Date();
+        const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        localStorage.setItem('vaultDailyUsage', JSON.stringify({
+          date: todayKey,
+          usedSeconds: 0
+        }));
+      } else {
+        saveUsageSettings({ usageMode: next });
+      }
+      
       return next;
     });
   };
@@ -236,6 +265,12 @@ const SettingDetails = () => {
         }
       </div>
       
+      {saveMessage && (
+        <div className={styles.saveMessage}>
+          {saveMessage}
+        </div>
+      )}
+      
       {usageMode === '고정시간모드' ? (
         <div className={styles.fixedTimeMode}>
           <div className={styles.settingTitle}>하루 총 사용시간 변경하기 (0시간 - 12시간)</div>
@@ -325,12 +360,6 @@ const SettingDetails = () => {
               </button>
             </div>
           </div>
-        </div>
-      )}
-      
-      {saveMessage && (
-        <div className={styles.saveMessage}>
-          {saveMessage}
         </div>
       )}
     </div>

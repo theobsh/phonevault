@@ -25,6 +25,7 @@ const Home = () => {
   );
   const [isStoringProcess, setIsStoringProcess] = useState(false);
   const [storeConfirmed, setStoreConfirmed] = useState(false);
+  const isFixedMode = usageSettings.usageMode === '고정시간모드';
 
   const isTakenOut = vaultState === 'taken-out';
   const displayTakenOut = isTakenOut || isStoringProcess;
@@ -132,23 +133,29 @@ const Home = () => {
         <span>자율모드</span>
         {isTakenOut && <span className={styles.modeState}>사용 중</span>}
       </div>
-      <div className={styles.autonomousInfo}>
-        {isTakenOut ? (
-          <>
-            자율모드 | 반납까지 남은 시간 :
-            <span className={styles.autonomousTimer}>{formatDurationHMS(sessionRemaining)}</span>
-          </>
-        ) : (
-          <>
-            회당 최대 {usageSettings.autonomousUsageMinutes}분 사용 · 대기 {usageSettings.autonomousWaitMinutes}분
-          </>
-        )}
-      </div>
+      {isTakenOut ? (
+        <div className={styles.autonomousInfo}>
+          자율모드 | 반납까지 남은 시간 :
+          <span className={styles.autonomousTimer}>{formatDurationHMS(sessionRemaining)}</span>
+        </div>
+      ) : (
+        <div className={styles.autonomousStorageContainer}>
+          <div className={styles.autonomousStorageIcon}>
+            <div className={styles.autonomousStorageIconInner}></div>
+          </div>
+          <div className={styles.autonomousStorageInfo}>
+            <div className={styles.autonomousStorageTitle}>자율모드 보관중</div>
+            <div className={styles.autonomousStorageDetails}>
+              회당 최대 {usageSettings.autonomousUsageMinutes}분 사용 · 대기 {usageSettings.autonomousWaitMinutes}분
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 
   return (
-    <div className={styles.homeBody} onClick={handleClick}>
+    <div className={styles.homeBody} onClick={!isTakenOut ? handleClick : undefined}>
       <div className={styles.statusSection}>
         <div className={`${styles.statusPill} ${isTakenOut ? styles.unlocked : styles.stored}`}>
           {isTakenOut ? '꺼낸 상태' : '보관중'}
@@ -162,32 +169,34 @@ const Home = () => {
       </div>
 
       {displayTakenOut && (
-        <div className={styles.takenOutTimers}>
-          <div className={styles.timerCard}>
-            <div className={styles.timerLabel}>오늘 남은 시간</div>
-            <div className={styles.timerValue}>{formatDurationHMS(dailyRemainingSeconds)}</div>
-          </div>
-          <div className={styles.timerCard}>
-            <div className={styles.timerLabel}>꺼내기 남은 시간</div>
-            <div className={styles.timerValue}>{formatDurationHMS(sessionRemaining)}</div>
-          </div>
-        </div>
-      )}
-
-      {displayTakenOut && (
-        <div className={styles.storeSection} onClick={(e) => e.stopPropagation()}>
-          {!isStoringProcess ? (
-            <button className={styles.storeButton} onClick={handleStore}>
-              보관하기
-            </button>
-          ) : (
-            <div className={styles.storeStatusContainer}>
-              {!storeConfirmed && <div className={styles.storeSpinner}></div>}
-              <div className={styles.storeStatusText}>
-                {storeConfirmed ? '보관 확인 됨' : '보관 확인 중'}
+        <div className={styles.takenOutSection} onClick={(e) => e.stopPropagation()}>
+          <div className={styles.storeSection}>
+            {!isStoringProcess ? (
+              <button className={styles.storeButton} onClick={handleStore}>
+                보관하기
+              </button>
+            ) : (
+              <div className={styles.storeStatusContainer}>
+                {!storeConfirmed && <div className={styles.storeSpinner}></div>}
+                <div className={styles.storeStatusText}>
+                  {storeConfirmed ? '보관 확인 됨' : '보관 확인 중'}
+                </div>
               </div>
+            )}
+          </div>
+
+          <div className={styles.takenOutTimers}>
+            {isFixedMode && (
+              <div className={styles.timerCard}>
+                <div className={styles.timerLabel}>오늘 남은 시간</div>
+                <div className={styles.timerValue}>{formatDurationHMS(dailyRemainingSeconds)}</div>
+              </div>
+            )}
+            <div className={styles.timerCard}>
+              <div className={styles.timerLabel}>꺼내기 남은 시간</div>
+              <div className={styles.timerValue}>{formatDurationHMS(sessionRemaining)}</div>
             </div>
-          )}
+          </div>
         </div>
       )}
 

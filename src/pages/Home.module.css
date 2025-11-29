@@ -3,15 +3,16 @@
   height: 780px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  gap: 40px;
+  gap: 15px;
   background-color: #000;
   color: #fff;
-  font-family: 'JUMBOTRON', 'Molot', sans-serif;
-  padding: 60px 80px;
+  font-family: 'Nanum Gothic', 'Nanum Gothic', sans-serif;
+  padding: 30px 80px;
   box-sizing: border-box;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .statusSection {
@@ -19,12 +20,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 120px;
+  min-height: 70px;
+  padding-right: 80px;
+  box-sizing: border-box;
 }
 
 .statusPill {
-  font-size: 40px;
-  padding: 20px 50px;
+  font-size: 36px;
+  padding: 15px 40px;
   border-radius: 50px;
   border: 4px solid currentColor;
   text-transform: uppercase;
@@ -43,6 +46,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  transform: translateX(-0px);
 }
 
 .clockLabel {
@@ -52,8 +56,8 @@
 }
 
 .clock {
-  font-size: 96px;
-  letter-spacing: 12px;
+  font-size: 80px;
+  letter-spacing: 10px;
 }
 
 .modeSection {
@@ -62,6 +66,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 0;
+  max-height: 380px;
 }
 
 .modeCard {
@@ -70,11 +76,11 @@
   border-radius: 36px;
   border: 3px solid #222;
   background: linear-gradient(135deg, #111 0%, #050505 100%);
-  padding: 60px;
+  padding: 30px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 20px;
   box-shadow: 0 0 40px rgba(255, 255, 255, 0.08);
 }
 
@@ -82,7 +88,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 56px;
+  font-size: 48px;
   letter-spacing: 6px;
 }
 
@@ -100,8 +106,8 @@
 }
 
 .diagram {
-  width: 280px;
-  height: 280px;
+  width: 240px;
+  height: 240px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -110,8 +116,8 @@
 }
 
 .diagramInner {
-  width: 190px;
-  height: 190px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background: #000;
   display: flex;
@@ -122,13 +128,13 @@
 }
 
 .diagramLabel {
-  font-size: 26px;
+  font-size: 22px;
   color: #aaa;
 }
 
 .diagramValue {
-  font-size: 48px;
-  margin-top: 10px;
+  font-size: 40px;
+  margin-top: 8px;
 }
 
 .usageDetails {
@@ -138,22 +144,22 @@
 }
 
 .detailLabel {
-  font-size: 32px;
+  font-size: 28px;
   color: #aaa;
 }
 
 .detailTime {
-  font-size: 72px;
+  font-size: 60px;
   letter-spacing: 6px;
 }
 
 .detailSub {
-  font-size: 28px;
+  font-size: 24px;
   color: #888;
 }
 
 .autonomousInfo {
-  font-size: 40px;
+  font-size: 36px;
   color: #fff;
   line-height: 1.4;
 }
@@ -163,12 +169,96 @@
   color: #34c759;
 }
 
+.autonomousStorageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.autonomousStorageIcon {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  border: 3px solid #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 0 30px rgba(52, 199, 89, 0.2);
+}
+
+.autonomousStorageIconInner {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #34c759 0%, #2fb34d 100%);
+  position: relative;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.autonomousStorageIconInner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.autonomousStorageInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.autonomousStorageTitle {
+  font-size: 42px;
+  color: #34c759;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+.autonomousStorageDetails {
+  font-size: 28px;
+  color: #aaa;
+  line-height: 1.4;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.takenOutSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .takenOutTimers {
   width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 30px;
-  min-height: 160px;
+  min-height: 90px;
 }
 
 .timerCard {
@@ -176,21 +266,21 @@
   border-radius: 24px;
   border: 2px solid #222;
   background: #0a0a0a;
-  padding: 30px 40px;
+  padding: 12px 25px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .timerLabel {
-  font-size: 28px;
+  font-size: 22px;
   color: #aaa;
   letter-spacing: 3px;
 }
 
 .timerValue {
-  font-size: 72px;
+  font-size: 50px;
   letter-spacing: 6px;
 }
 
@@ -202,8 +292,8 @@
 }
 
 .storeButton {
-  padding: 30px 80px;
-  font-size: 56px;
+  padding: 12px 150px;
+  font-size: 36px;
   font-weight: bold;
   border: none;
   border-radius: 20px;
@@ -226,20 +316,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .storeSpinner {
-  width: 70px;
-  height: 70px;
-  border: 8px solid #333;
-  border-top: 8px solid #34c759;
+  width: 50px;
+  height: 50px;
+  border: 6px solid #333;
+  border-top: 6px solid #34c759;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 .storeStatusText {
-  font-size: 42px;
+  font-size: 28px;
   color: #fff;
   letter-spacing: 4px;
 }
