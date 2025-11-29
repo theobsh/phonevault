@@ -1,4 +1,4 @@
-.contactsBody {
+.simulationBody {
   width: 1280px;
   height: 780px;
   display: flex;
@@ -7,7 +7,7 @@
   background-color: #000;
 }
 
-.contactsContainer {
+.simulationContainer {
   width: 90%;
   height: 90%;
   display: flex;
@@ -50,16 +50,17 @@
   margin: 0;
 }
 
-.contactsList {
+.simulationContent {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  width: 100%;
 }
 
-.contactButton {
+.simButton {
   width: 100%;
-  padding: 24px;
-  font-size: 40px;
+  padding: 40px;
+  font-size: 48px;
   font-weight: bold;
   background-color: #1a1a1a;
   color: #fff;
@@ -69,17 +70,17 @@
   transition: all 0.3s ease;
 }
 
-.contactButton:hover {
+.simButton:hover {
   background-color: #2a2a2a;
   border-color: #555;
   transform: scale(1.02);
 }
 
-.contactButton:active {
+.simButton:active {
   transform: scale(0.98);
 }
 
-.contactButton:focus {
+.simButton:focus {
   outline: none;
   background-color: #1a1a1a;
   border-color: #333;

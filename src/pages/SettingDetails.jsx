@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './SettingDetails.module.css';
+import { getUsageSettings, saveUsageSettings } from '../utils/vaultStorage';
 
 const SettingDetails = () => {
   const { category } = useParams();
@@ -20,6 +21,14 @@ const SettingDetails = () => {
     facebook: false,
     twitter: true,
   });
+
+  const initialSettings = getUsageSettings();
+  // States for usage mode settings
+  const [usageMode, setUsageMode] = useState(initialSettings.usageMode); // '고정시간모드' or '자율모드'
+  const [fixedTimeHours, setFixedTimeHours] = useState(initialSettings.fixedTimeHours); // 0-12 hours
+  const [autonomousUsageMinutes, setAutonomousUsageMinutes] = useState(initialSettings.autonomousUsageMinutes); // 30-120 minutes
+  const [autonomousWaitMinutes, setAutonomousWaitMinutes] = useState(initialSettings.autonomousWaitMinutes); // 20-120 minutes
+  const [saveMessage, setSaveMessage] = useState('');
 
   const alarmSounds = [
     '모닝콜',
@@ -44,6 +53,50 @@ const SettingDetails = () => {
       ...prev,
       [app]: !prev[app]
     }));
+  };
+
+  const handleModeToggle = () => {
+    setUsageMode(prev => {
+      const next = prev === '고정시간모드' ? '자율모드' : '고정시간모드';
+      saveUsageSettings({ usageMode: next });
+      return next;
+    });
+  };
+
+  const handleSave = () => {
+    saveUsageSettings({
+      usageMode,
+      fixedTimeHours,
+      autonomousUsageMinutes,
+      autonomousWaitMinutes
+    });
+    
+    setSaveMessage('설정이 저장되었습니다. 24시간 후에 적용됩니다.');
+    setTimeout(() => setSaveMessage(''), 3000);
+  };
+
+  const validateFixedTimeHours = (value) => {
+    const num = parseInt(value);
+    if (isNaN(num) || num < 0 || num > 12) {
+      return false;
+    }
+    return true;
+  };
+
+  const validateAutonomousUsageMinutes = (value) => {
+    const num = parseInt(value);
+    if (isNaN(num) || num < 30 || num > 120) {
+      return false;
+    }
+    return true;
+  };
+
+  const validateAutonomousWaitMinutes = (value) => {
+    const num = parseInt(value);
+    if (isNaN(num) || num < 20 || num > 120) {
+      return false;
+    }
+    return true;
   };
 
   const renderConnectionSettings = () => (
@@ -161,6 +214,128 @@ const SettingDetails = () => {
     </div>
   );
 
+  const renderUsageModeSettings = () => (
+    <div className={styles.settingSection}>
+      <div className={styles.infoBox}>
+        모드 변경은 24시간 후에 적용됩니다.
+      </div>
+      
+      <div className={styles.modeToggle} onClick={handleModeToggle}>
+        <div className={`${styles.toggleOption} ${usageMode === '고정시간모드' ? styles.active : ''}`}>
+          고정시간모드
+        </div>
+        <div className={`${styles.toggleOption} ${usageMode === '자율모드' ? styles.active : ''}`}>
+          자율모드
+        </div>
+      </div>
+      
+      <div className={styles.modeDescription}>
+        {usageMode === '고정시간모드'
+          ? "일별 핸드폰 사용가능 총 시간 지정"
+          : "총 사용시간 설정 없이 회당 사용시간 제한"
+        }
+      </div>
+      
+      {usageMode === '고정시간모드' ? (
+        <div className={styles.fixedTimeMode}>
+          <div className={styles.settingTitle}>하루 총 사용시간 변경하기 (0시간 - 12시간)</div>
+          <div className={styles.settingNote}>시간 변경 후 24시간 후에 반영됩니다</div>
+          <div className={styles.timeInputSection}>
+            <div className={styles.inputGroup}>
+              <span>시간:</span>
+              <input
+                type="number"
+                min="0"
+                max="12"
+                value={fixedTimeHours}
+                onChange={(e) => {
+                  if (validateFixedTimeHours(e.target.value)) {
+                    const nextValue = parseInt(e.target.value);
+                    setFixedTimeHours(nextValue);
+                  }
+                }}
+                className={styles.timeInput}
+              />
+              <span>시간</span>
+            </div>
+            <button
+              onClick={handleSave}
+              className={styles.saveButton}
+            >
+              저장
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.autonomousMode}>
+          <div className={styles.settingNote}>시간 변경 후 24시간 후에 반영됩니다</div>
+          
+          <div className={styles.settingGroup}>
+            <div className={styles.settingTitle}>한번 꺼냈을 때 최대 시간 (30분 - 120분)</div>
+            <div className={styles.timeInputSection}>
+              <div className={styles.inputGroup}>
+                <input
+                  type="number"
+                  min="30"
+                  max="120"
+                  value={autonomousUsageMinutes}
+                  onChange={(e) => {
+                    if (validateAutonomousUsageMinutes(e.target.value)) {
+                      const nextValue = parseInt(e.target.value);
+                      setAutonomousUsageMinutes(nextValue);
+                    }
+                  }}
+                  className={styles.timeInput}
+                />
+                <span>분</span>
+              </div>
+              <button
+                onClick={handleSave}
+                className={styles.saveButton}
+              >
+                저장
+              </button>
+            </div>
+          </div>
+          
+          <div className={styles.settingGroup}>
+            <div className={styles.settingTitle}>재사용까지 대기 시간 (20분 - 120분)</div>
+            <div className={styles.timeInputSection}>
+              <div className={styles.inputGroup}>
+                <input
+                  type="number"
+                  min="20"
+                  max="120"
+                  value={autonomousWaitMinutes}
+                  onChange={(e) => {
+                    if (validateAutonomousWaitMinutes(e.target.value)) {
+                      const nextValue = parseInt(e.target.value);
+                      setAutonomousWaitMinutes(nextValue);
+                    }
+                  }}
+                  className={styles.timeInput}
+                />
+                <span>분</span>
+              </div>
+              <button
+                onClick={handleSave}
+                className={styles.saveButton}
+              >
+                저장
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {saveMessage && (
+        <div className={styles.saveMessage}>
+          {saveMessage}
+        </div>
+      )}
+    </div>
+  );
+
   const renderContent = () => {
     switch(category) {
       case '연결':
@@ -171,6 +346,8 @@ const SettingDetails = () => {
         return renderLightSettings();
       case '알림':
         return renderNotificationSettings();
+      case '사용모드 설정':
+        return renderUsageModeSettings();
       default:
         return <div>설정을 선택해주세요.</div>;
     }

@@ -1,0 +1,105 @@
+.warningBody {
+  width: 1280px;
+  height: 780px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a0000;
+  animation: flash 1s infinite;
+  font-family: 'JUMBOTRON', 'Molot', sans-serif;
+}
+
+.warningContainer {
+  width: 90%;
+  height: 90%;
+  border: 6px solid #ff3b30;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  box-shadow: 0 0 40px rgba(255, 59, 48, 0.7);
+  color: #fff;
+  text-align: center;
+}
+
+.warningTitle {
+  font-size: 120px;
+  letter-spacing: 12px;
+  color: #ff3b30;
+}
+
+.warningMessage {
+  font-size: 32px;
+  max-width: 900px;
+  line-height: 1.4;
+}
+
+.overtimeLabel {
+  font-size: 28px;
+  color: #ffcc00;
+  margin-top: 20px;
+}
+
+.overtimeTimer {
+  font-size: 140px;
+  color: #ffcc00;
+  font-family: monospace;
+}
+
+.actionText {
+  font-size: 28px;
+  color: #ff6f61;
+}
+
+.storeButton {
+  margin-top: 30px;
+  padding: 25px 60px;
+  font-size: 48px;
+  font-weight: bold;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+  background-color: #34c759;
+  color: #fff;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.storeButton:hover:not(:disabled) {
+  transform: scale(1.03);
+  background-color: #2fb34d;
+}
+
+.storeButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.storeStatus {
+  font-size: 32px;
+  color: #ffcc00;
+  margin-top: 20px;
+}
+
+.storeStatusConfirmed {
+  font-size: 36px;
+  color: #34c759;
+  margin-top: 20px;
+  border: 2px solid #34c759;
+  padding: 15px 40px;
+  border-radius: 12px;
+}
+
+@keyframes flash {
+  0% {
+    background-color: #1a0000;
+  }
+  50% {
+    background-color: #400000;
+  }
+  100% {
+    background-color: #1a0000;
+  }
+}

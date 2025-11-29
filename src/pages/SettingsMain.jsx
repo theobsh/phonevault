@@ -3,7 +3,11 @@ import styles from './SettingsMain.module.css';
 
 const SettingsMain = () => {
   const navigate = useNavigate();
-  const settingsItems = ['연결', '소리', '조명', '알림'];
+  
+  // First row: 연결, 사용모드 설정
+  // Second row: 소리, 조명, 알림
+  const firstRowItems = ['사용모드 설정', '연결'];
+  const secondRowItems = ['소리', '조명', '알림'];
 
   const handleSettingClick = (item) => {
     navigate(`/settings/${item}`);
@@ -24,15 +28,28 @@ const SettingsMain = () => {
             <h1 className={styles.title}>설정</h1>
           </div>
           <div className={styles.settingsContent}>
-            {settingsItems.map((item, index) => (
-              <button
-                key={index}
-                className={styles.settingButton}
-                onClick={() => handleSettingClick(item)}
-              >
-                {item}
-              </button>
-            ))}
+            <div className={styles.firstRow}>
+              {firstRowItems.map((item, index) => (
+                <button
+                  key={index}
+                  className={styles.settingButton}
+                  onClick={() => handleSettingClick(item)}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+            <div className={styles.secondRow}>
+              {secondRowItems.map((item, index) => (
+                <button
+                  key={index}
+                  className={styles.settingButton}
+                  onClick={() => handleSettingClick(item)}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>

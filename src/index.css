@@ -14,7 +14,7 @@ html, body {
   margin: 0;
   padding: 0;
   width: 1280px;
-  height: 720px;
+  height: 780px;
   overflow: hidden; /* Prevent scrolling */
   font-family: "Molot", sans-serif;
 }

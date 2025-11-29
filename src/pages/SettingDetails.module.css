@@ -1,6 +1,6 @@
 .detailsBody {
   width: 1280px;
-  height: 720px;
+  height: 780px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -294,4 +294,161 @@
 
 .content::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+/* Usage Mode Settings */
+.usageModeSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.infoBox {
+  padding: 20px 30px;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 32px;
+  text-align: center;
+}
+
+.modeToggle {
+  display: flex;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.toggleOption {
+  flex: 1;
+  padding: 25px 20px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #999;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.toggleOption.active {
+  background-color: #00ff0020;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+}
+
+.modeDescription {
+  padding: 20px 30px;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 36px;
+  text-align: center;
+}
+
+.fixedTimeMode, .autonomousMode {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.settingTitle {
+  color: #fff;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.settingNote {
+  color: #999;
+  font-size: 28px;
+  margin: 0;
+}
+
+.settingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.timeInputSection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 25px 30px;
+  background-color: #1a1a1a;
+  border: 2px solid #333;
+  border-radius: 8px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+.inputGroup span {
+  color: #fff;
+  font-size: 36px;
+}
+
+.timeInput {
+  width: 120px;
+  padding: 15px 20px;
+  font-size: 36px;
+  background-color: #0a0a0a;
+  color: #fff;
+  border: 2px solid #333;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.timeInput:focus {
+  outline: none;
+  border-color: #00ff00;
+}
+
+.saveButton {
+  padding: 15px 40px;
+  font-size: 36px;
+  font-weight: bold;
+  background-color: #00ff00;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.saveButton:hover {
+  background-color: #00cc00;
+  transform: scale(1.02);
+}
+
+.saveButton:active {
+  transform: scale(0.98);
+}
+
+.saveMessage {
+  padding: 20px 30px;
+  background-color: #00ff0020;
+  border: 2px solid #00ff00;
+  border-radius: 8px;
+  color: #00ff00;
+  font-size: 32px;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,6 +1,6 @@
 .settingsBody {
   width: 1280px;
-  height: 720px;
+  height: 780px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,6 +13,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  justify-content: center;
 }
 
 .header {
@@ -51,10 +52,25 @@
 }
 
 .settingsContent {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 30px;
   padding: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.firstRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  width: 100%;
+}
+
+.secondRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
   width: 100%;
 }
 

@@ -1,6 +1,6 @@
 .unlockBody {
   width: 1280px;
-  height: 720px;
+  height: 780px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,6 +51,7 @@
   justify-content: center;
   gap: 60px;
   width: 100%;
+  margin-top: 60px;
 }
 
 .circleButton {
@@ -90,7 +91,7 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .customButton:hover {
@@ -109,7 +110,7 @@
   gap: 20px;
   align-items: center;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .timeInput {
@@ -153,29 +154,6 @@
   transform: scale(0.98);
 }
 
-.countdownContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  width: 100%;
-}
-
-.countdownTitle {
-  color: #fff;
-  font-size: 80px;
-  text-align: center;
-  margin: 0;
-}
-
-.countdownTimer {
-  color: #34c759;
-  font-size: 170px;
-  font-weight: bold;
-  font-family: monospace;
-  text-align: center;
-}
-
 .errorMessage {
   color: #ff3b30;
   font-size: 32px;
@@ -184,53 +162,18 @@
   font-weight: bold;
 }
 
-.storeButton {
-  width: 400px;
-  padding: 25px;
-  font-size: 56px;
-  font-weight: bold;
-  background-color: #34c759;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 60px;
-}
-
-.storeButton:hover {
-  background-color: #2fb34d;
-  transform: scale(1.02);
-}
-
-.storeButton:active {
-  transform: scale(0.98);
-}
-
-.storeStatusContainer {
+.processingContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
-  margin-top: 60px;
+  gap: 40px;
+  margin-top: 80px;
 }
 
-.storeStatusText {
+.processingTitle {
   color: #fff;
-  font-size: 56px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.storeStatusConfirmed {
-  color: #34c759;
-  font-size: 56px;
-  font-weight: bold;
-  text-align: center;
-  padding: 25px 50px;
-  border: 4px solid #34c759;
-  border-radius: 12px;
-  background-color: rgba(52, 199, 89, 0.1);
+  font-size: 70px;
+  margin: 0;
 }
 
 .spinner {

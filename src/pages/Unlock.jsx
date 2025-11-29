@@ -1,36 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Unlock.module.css';
+import { startUnlockSession } from '../utils/vaultStorage';
 
 const Unlock = () => {
   const navigate = useNavigate();
   const [showCustomInput, setShowCustomInput] = useState(false);
   const [customTime, setCustomTime] = useState('');
-  const [countdown, setCountdown] = useState(null);
-  const [remainingTime, setRemainingTime] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isStoring, setIsStoring] = useState(false);
-  const [storeConfirmed, setStoreConfirmed] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  useEffect(() => {
-    if (countdown !== null && remainingTime > 0) {
-      const timer = setInterval(() => {
-        setRemainingTime((prev) => {
-          if (prev <= 1) {
-            clearInterval(timer);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+  const handleBack = () => {
+    if (isProcessing) return;
+    navigate('/menu');
+  };
 
-      return () => clearInterval(timer);
-    }
-  }, [countdown, remainingTime]);
+  const confirmUnlock = (minutes) => {
+    if (isProcessing) return;
+    startUnlockSession(minutes);
+    setIsProcessing(true);
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
+  };
 
-  const handleTimeSelect = (timeInMinutes) => {
-    setCountdown(timeInMinutes);
-    setRemainingTime(timeInMinutes * 60);
+  const handleTimeSelect = (minutes) => {
+    confirmUnlock(minutes);
   };
 
   const handleCustomInput = () => {
@@ -38,91 +33,62 @@ const Unlock = () => {
   };
 
   const handleCustomConfirm = () => {
-    const minutes = parseInt(customTime);
+    const minutes = parseInt(customTime, 10);
     setErrorMessage('');
-    
-    if (!isNaN(minutes) && minutes > 0) {
-      if (minutes > 60) {
-        setErrorMessage('최대 60분까지 설정할 수 있습니다.');
-        return;
-      }
-      setCountdown(minutes);
-      setRemainingTime(minutes * 60);
-      setShowCustomInput(false);
-      setCustomTime('');
+
+    if (Number.isNaN(minutes) || minutes <= 0) {
+      setErrorMessage('시간을 입력해주세요.');
+      return;
     }
-  };
 
-  const formatCountdown = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    if (hours > 0) {
-      return `${hours}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    if (minutes > 60) {
+      setErrorMessage('최대 60분까지 설정할 수 있습니다.');
+      return;
     }
-    return `${minutes}:${String(secs).padStart(2, '0')}`;
-  };
 
-  const handleBack = () => {
-    navigate('/menu');
-  };
-
-  const handleStore = () => {
-    setIsStoring(true);
-    
-    // 3초 후 보관 확인됨으로 변경
-    setTimeout(() => {
-      setIsStoring(false);
-      setStoreConfirmed(true);
-      
-      // 2초 후 홈으로 이동
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
-    }, 3000);
+    confirmUnlock(minutes);
   };
 
   return (
     <>
       <div className={styles.unlockBody}>
         <div className={styles.unlockContainer}>
-          {countdown === null ? (
+          <div className={styles.header}>
+            <button onClick={handleBack} className={styles.backButton}>
+              ← 뒤로
+            </button>
+            <h1 className={styles.title}>꺼내기</h1>
+          </div>
+
+          {!isProcessing ? (
             <>
-              <div className={styles.header}>
-                <button onClick={handleBack} className={styles.backButton}>
-                  ← 뒤로
+              <div className={styles.circleButtonsContainer}>
+                <button
+                  className={styles.circleButton}
+                  onClick={() => handleTimeSelect(5)}
+                >
+                  5분
                 </button>
-                <h1 className={styles.title}>꺼내기</h1>
+                <button
+                  className={styles.circleButton}
+                  onClick={() => handleTimeSelect(30)}
+                >
+                  30분
+                </button>
+                <button
+                  className={styles.circleButton}
+                  onClick={() => handleTimeSelect(60)}
+                >
+                  1시간
+                </button>
               </div>
               {!showCustomInput ? (
-                <>
-                  <div className={styles.circleButtonsContainer}>
-                    <button
-                      className={styles.circleButton}
-                      onClick={() => handleTimeSelect(5)}
-                    >
-                      5분
-                    </button>
-                    <button
-                      className={styles.circleButton}
-                      onClick={() => handleTimeSelect(30)}
-                    >
-                      30분
-                    </button>
-                    <button
-                      className={styles.circleButton}
-                      onClick={() => handleTimeSelect(60)}
-                    >
-                      1시간
-                    </button>
-                  </div>
-                  <button
-                    className={styles.customButton}
-                    onClick={handleCustomInput}
-                  >
-                    직접 입력
-                  </button>
-                </>
+                <button
+                  className={styles.customButton}
+                  onClick={handleCustomInput}
+                >
+                  직접 입력
+                </button>
               ) : (
                 <div className={styles.customInputContainer}>
                   <input
@@ -147,37 +113,15 @@ const Unlock = () => {
               )}
             </>
           ) : (
-            <div className={styles.countdownContainer}>
-              <h1 className={styles.countdownTitle}>디바이스를 꺼냅니다</h1>
-              <div className={styles.countdownTimer}>{formatCountdown(remainingTime)}</div>
-              
-              {!isStoring && !storeConfirmed && (
-                <button
-                  className={styles.storeButton}
-                  onClick={handleStore}
-                >
-                  보관하기
-                </button>
-              )}
-              
-              {isStoring && (
-                <div className={styles.storeStatusContainer}>
-                  <div className={styles.spinner}></div>
-                  <div className={styles.storeStatusText}>보관 확인 중</div>
-                </div>
-              )}
-              
-              {storeConfirmed && (
-                <div className={styles.storeStatusContainer}>
-                  <div className={styles.storeStatusConfirmed}>보관 확인 됨</div>
-                </div>
-              )}
+            <div className={styles.processingContainer}>
+              <h1 className={styles.processingTitle}>디바이스를 꺼냅니다</h1>
+              <div className={styles.spinner}></div>
             </div>
           )}
         </div>
       </div>
     </>
   );
-}
+};
 
 export default Unlock;
